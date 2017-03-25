@@ -11,7 +11,7 @@ module.exports = {
         filename: "[name].[chunkhash].js"
     },
     resolve: {
-        extensions: ["js", "jsx"]
+        extensions: [".js", ".jsx"]
     },
     plugins: [
         new CleanPlugin(["dist"], {
@@ -45,5 +45,17 @@ module.exports = {
                 collapseWhitespace: true    //删除空白符与换行符
             }
         })    
-    ] 
+    ],
+    module: {
+        loaders: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ["react", "es2015"]
+                }
+            }    
+        ]
+    }
 }
